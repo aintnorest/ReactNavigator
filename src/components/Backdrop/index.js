@@ -14,8 +14,9 @@ export default React.createClass({
     componentWillUnmount() { ss.unuse(); },
 
     render() {
+        console.log("Background is Rendering");
         return (
-            <div className="VZ_Backdrop">
+            <div key="b1" className="VZ_Backdrop">
             </div>
         );
     },

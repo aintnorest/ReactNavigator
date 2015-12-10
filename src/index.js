@@ -15,7 +15,7 @@ setTimeout(()=>{
             cardTwo:       {x: 24, y: 0, z: 2, opacity: 100}
         },
     }});
-},2000);
+},12000);
 //
 setTimeout(()=>{
     store.dispatch({type:'NAV_PUSH_BASE',payload:{
@@ -25,7 +25,7 @@ setTimeout(()=>{
             cardThree:     {x: 24, y: 0, z: 2, opacity: 100},
         },
     }});
-},4000);
+},14000);
 //
 setTimeout(()=>{
     store.dispatch({type:'NAV_PUSH_BASE',payload:{
@@ -36,7 +36,7 @@ setTimeout(()=>{
             cardThree:     {x: 46, y: 0, z: 2, opacity: 100},
         },
     }});
-},7000);
+},17000);
 //
 setTimeout(()=>{
     store.dispatch({type:'NAV_PUSH_BASE',payload:{
@@ -47,17 +47,17 @@ setTimeout(()=>{
             cardOne:     {x: 46, y: 0, z: 2, opacity: 100},
         },
     }});
-},10000);
+},19000);
 //
 setTimeout(()=>{
     store.dispatch({type:'NAV_POP_BASE'});
-},12000);
+},21000);
 setTimeout(()=>{
     store.dispatch({type:'NAV_POP_BASE'});
-},14000);
+},23000);
 setTimeout(()=>{
     store.dispatch({type:'NAV_POP_BASE'});
-},16000);
+},25000);
 //
 render(
     <Navigator

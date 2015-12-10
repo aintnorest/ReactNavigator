@@ -14,8 +14,9 @@ export default React.createClass({
     componentWillUnmount() { ss.unuse(); },
 
     render() {
+        console.log("This is being Rendered ",this.props.nmb);
         return (
-            <div className="VZ_Card">
+            <div key={"card"+this.props.nmb} className="VZ_Card">
             {this.props.nmb}
             </div>
         );

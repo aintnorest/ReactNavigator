@@ -19,7 +19,6 @@ function checkforMatch(ary){
 export default React.createClass({
     mixins: [PureRenderMixin],
     elementCache: {}, unsubscribe: ()=>{},
-    currentCount: 0,
 
     getInitialState() { return { elements: {} } },
 
@@ -47,7 +46,10 @@ export default React.createClass({
 
     willEnter(key) {
         /* Cache the element so it can be refrenced instead of recreated on every loop */
-        this.elementCache[key] = this.props.sceneConfigurations[key].VM(this.props.store);
+        this.elementCache[key] = (<div key={key}>
+            {this.props.sceneConfigurations[key].VM(this.props.store)}
+        </div>);
+        //this.elementCache[key] = this.props.sceneConfigurations[key].VM(this.props.store);
         return this.props.sceneConfigurations[key].Enter;
     },
 
@@ -58,25 +60,24 @@ export default React.createClass({
         if(this.elementCache[key] === undefined) return;
         if(checkforMatch([[cS.x,sC.x],[cS.y,sC.y],[cS.opacity,sC.opacity]])) {
             delete this.elementCache[key];
-            if(Object.keys(value).length === this.currentCount) this.props.finishedTransition();
         }
         return sC;
     },
 
     sceneObj(iS) {
         return (key) => {
-            const {...style} = iS[key];
-            const s = {opacity:style.opacity/100, WebkitTransform:"translate("+style.x+"vw,"+style.y+"vh)", transform: "translate("+style.x+"vw,"+style.y+"vh)", zIndex: style.z};
-            return (
-                <div key={key} style={s}>
-                    {(this.elementCache[key]) ? this.elementCache[key] : false}
-                </div>
-            );
+            const style = iS[key];
+            const trns = "translate("+style.x+"vw,"+style.y+"vh) translateZ("+style.z+"px)";
+            const s = {
+                opacity:style.opacity/100,
+                WebkitTransform: trns,
+                transform: trns,
+            };
+            return (this.elementCache[key]) ? React.cloneElement(this.elementCache[key],{style:s}) : false;
         };
     },
 
-    interpolatedStyles(iS) {
-
+    interpolatedStyles(iS,anything) {
         return (
             <div>
                 {Object.keys(iS).map(this.sceneObj(iS))}
